@@ -1,13 +1,15 @@
 import { WithSkiaWeb } from "@shopify/react-native-skia/lib/module/web";
-import React from 'react';
 import { Text } from "react-native";
 
 export default function Index() {
   return (
     <WithSkiaWeb
-      // import() uses the default export of MySkiaComponent.tsx
+      opts={{
+        locateFile: (file: string) =>
+          `https://cdn.jsdelivr.net/npm/canvaskit-wasm@0.40/bin/full/${file}`,
+      }}
       getComponent={() => import("../Breathe")}
-      fallback={<Text>Loading Skia...</Text>}
+      fallback={<Text style={{ textAlign: "center" }}>Loading Skia...</Text>}
     />
   );
 }
